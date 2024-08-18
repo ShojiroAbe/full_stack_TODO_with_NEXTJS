@@ -11,3 +11,11 @@
 https://github.com/Shin-sibainu/todo-client
 バックエンド
 https://github.com/Shin-sibainu/todo-server
+
+## Prisma ORM セットアップ
+Prisma quickstart
+https://www.prisma.io/docs/getting-started/quickstart
+
+npm install typescript ts-node @types/node --save-dev
+npm install prisma --save-dev
+npx prisma init --datasource-provider sqlite
