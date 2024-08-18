@@ -18,4 +18,15 @@ https://www.prisma.io/docs/getting-started/quickstart
 
 npm install typescript ts-node @types/node --save-dev
 npm install prisma --save-dev
-npx prisma init --datasource-provider sqlite
+
+### npx prisma init --datasource-provider sqlite
+これにより、prisma.schemaファイルを含む新しいprismaディレクトリが作成され、データベースとしてSQLiteが設定されます。これで、データをモデル化し、いくつかのテーブルを持つデータベースを作成する準備ができました。
+
+### npx prisma migrate dev --name init
+Prisma Migrateを使用してマイグレーションを実行し、データベース・テーブルを作成します。
+この時点では、Prismaスキーマはありますが、データベースはまだありません。ターミナルで次のコマンドを実行して、SQLiteデータベースと、モデルで表されるテーブルを作成します。
+
+
+### npx prisma studio
+Prisma Studioでデータを表示
+Prisma ORMには、データベースのデータを表示および編集するためのGUIが組み込まれています。
