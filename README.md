@@ -24,7 +24,7 @@ npm install prisma --save-dev
 
 ### npx prisma migrate dev --name init
 Prisma Migrateを使用してマイグレーションを実行し、データベース・テーブルを作成します。
-この時点では、Prismaスキーマはありますが、データベースはまだありません。ターミナルで次のコマンドを実行して、SQLiteデータベースと、モデルで表されるテーブルを作成します。
+この時点では、Prismaスキーマはありますが、データベースはまだありません。ターミナルでこのコマンドを実行して、SQLiteデータベースと、モデルで表されるテーブルを作成します。
 
 ### npx prisma studio
 Prisma Studioでデータを表示
