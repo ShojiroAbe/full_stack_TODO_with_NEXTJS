@@ -31,11 +31,28 @@ app.post("/createTodo", async (req: Request, res: Response) => {
     return res.json(createTodo)
   } catch (e) {
     console.log(e);
-    return e;
+    return res.status(400).json(e);
   }
-
-  
 });
+
+app.put("/editTodo/:id", async (req: Request, res: Response) => {
+  try {
+    const id = Number(req.params.id) //"/editTodo/:id"の「:id」部分の取得
+    const { title, isCompleted } = req.body;
+    const editTodo = await prisma.todo.update({
+      where: { id },
+      data: {
+        title,
+        isCompleted,
+      }
+    });
+    return res.json(editTodo)
+  } catch (e) {
+    console.log(e);
+    return res.status(400).json(e);
+  }
+});
+
 
 app.listen(PORT, () => console.log("server is running"));
 
