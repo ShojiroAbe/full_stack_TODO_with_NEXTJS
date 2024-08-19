@@ -12,6 +12,9 @@ https://github.com/Shin-sibainu/todo-client
 バックエンド
 https://github.com/Shin-sibainu/todo-server
 
+## Node.js・TypeScriptの開発環境構築
+https://zenn.dev/hotcake34/scraps/a900eddb65302f
+
 ## Prisma ORM セットアップ
 Prisma quickstart
 https://www.prisma.io/docs/getting-started/quickstart
