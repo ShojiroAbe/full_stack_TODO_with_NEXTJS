@@ -12,6 +12,9 @@ https://github.com/Shin-sibainu/todo-client
 バックエンド
 https://github.com/Shin-sibainu/todo-server
 
+## Node.js・TypeScriptの開発環境構築
+https://zenn.dev/hotcake34/scraps/a900eddb65302f
+
 ## Prisma ORM セットアップ
 Prisma quickstart
 https://www.prisma.io/docs/getting-started/quickstart
@@ -24,7 +27,7 @@ npm install prisma --save-dev
 
 ### npx prisma migrate dev --name init
 Prisma Migrateを使用してマイグレーションを実行し、データベース・テーブルを作成します。
-この時点では、Prismaスキーマはありますが、データベースはまだありません。ターミナルで次のコマンドを実行して、SQLiteデータベースと、モデルで表されるテーブルを作成します。
+この時点では、Prismaスキーマはありますが、データベースはまだありません。ターミナルでこのコマンドを実行して、SQLiteデータベースと、モデルで表されるテーブルを作成します。
 
 ### npx prisma studio
 Prisma Studioでデータを表示
