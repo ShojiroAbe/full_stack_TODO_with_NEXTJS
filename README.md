@@ -12,6 +12,17 @@ https://github.com/Shin-sibainu/todo-client
 バックエンド
 https://github.com/Shin-sibainu/todo-server
 
+## client（フロントセットアップ）
+npx create-next-app@lates
+
+### 各種設定
+Would you like to use TypeScript? … Yes
+Would you like to use ESLint? … Yes
+Would you like to use Tailwind CSS? … Yes
+Would you like to use `src/` directory? … No
+Would you like to use App Router? (recommended) … Yes
+Would you like to customize the default import alias (@/*)? … No
+
 ## Node.js・TypeScriptの開発環境構築
 https://zenn.dev/hotcake34/scraps/a900eddb65302f
 
