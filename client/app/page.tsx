@@ -1,7 +1,24 @@
-import Image from "next/image";
+"use client"
+// ↑ "use client" は、Next.js 13以降で導入された機能で、特定のコンポーネントやファイルがクライアントサイドでのみ実行されることを示します。
+// これを設定した理由は、今Next.js13はデフォルトでサーバーサイドでレンダリングされるのに対して、"useSWR"（他useState, useEffect）がクライアンサイドでしか実行されないため
+
 import { Todo } from "./components/Todo";
+import useSWR from "swr";
+
+async function fetcher(key: string) {
+  console.log(key);
+  // keyにはエンドポイントが入ります
+  return fetch(key).then((res) => res.json())
+}
 
 export default function Home() {
+  // const allTodos = await fetch("API", { cache: "no-store" })
+  // const allTodos = await fetch("API", { cache: "force-cache" })
+
+const { data, isLoading, error } = useSWR('http://localhost:8080/allTodos', fetcher)
+
+console.log(data);
+
   return (
     <div
       className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden mt-32 py-4 px-4"
