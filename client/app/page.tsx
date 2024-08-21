@@ -19,6 +19,7 @@ export default function Home() {
 
   const inputRef = useRef<HTMLInputElement | null>(null)
 
+  // SWRは、Reactアプリケーションでデータを取得・キャッシュするためのライブラリ
   const { data, isLoading, error } = useSWR('http://localhost:8080/allTodos', fetcher)
   console.log(data);
 
@@ -26,6 +27,15 @@ export default function Home() {
     e.preventDefault();
 
     console.log(inputRef.current?.value);
+
+    const response = fetch('http://localhost:8080/createTodo', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: inputRef.current?.value,
+        isCompleted: false,
+      }),
+    });
   }
 
   return (
