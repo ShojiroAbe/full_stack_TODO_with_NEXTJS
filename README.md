@@ -12,6 +12,27 @@ https://github.com/Shin-sibainu/todo-client
 バックエンド
 https://github.com/Shin-sibainu/todo-server
 
+## client（フロントセットアップ）
+npx create-next-app@lates
+
+### 各種設定
+Would you like to use TypeScript? … Yes
+Would you like to use ESLint? … Yes
+Would you like to use Tailwind CSS? … Yes
+Would you like to use `src/` directory? … No
+Would you like to use App Router? (recommended) … Yes
+Would you like to customize the default import alias (@/*)? … No
+
+## SWR(React　Hooksのライブラリ)
+npm i swr
+データフェッチ: 自動的にデータを取得し、キャッシュを管理。データを再利用しつつ、バックグラウンドで最新のデータを取得します。
+リアルタイム更新: フォーカス時や再接続時にデータを自動的に再取得。
+キャッシュ: 前回取得したデータをキャッシュに保存し、次回同じデータをリクエストする際に即座に返します。
+シンプルなAPI: useSWR フックを使って、簡単にデータフェッチを行い、ローディングやエラーハンドリングを管理できます。
+useSWR を使うことで、シンプルにデータを取得し、リアルタイムで更新されるUIを構築することができます。
+https://swr.vercel.app/ja
+
+
 ## Node.js・TypeScriptの開発環境構築
 https://zenn.dev/hotcake34/scraps/a900eddb65302f
 
