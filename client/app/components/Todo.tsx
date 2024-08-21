@@ -1,6 +1,11 @@
 import React from 'react'
+import type { TodoType } from "../types"
 
-export const Todo = () => {
+type TodoProps = {
+  todo: TodoType
+}
+
+export const Todo = ({ todo } : TodoProps) => {
   return (
     <div>
       <li className="py-4">
@@ -14,7 +19,7 @@ export const Todo = () => {
                     border-gray-300 rounded"
             />
             <label className="ml-3 block text-gray-900">
-              <span className="text-lg font-medium mr-2"> 散歩 </span>
+              <span className="text-lg font-medium mr-2">{ todo.title }</span>
             </label>
           </div>
           <div className="flex items-center space-x-2">

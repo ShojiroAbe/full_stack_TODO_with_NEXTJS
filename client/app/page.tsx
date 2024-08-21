@@ -4,6 +4,7 @@
 
 import { Todo } from "./components/Todo";
 import useSWR from "swr";
+import type { TodoType } from "./types"
 
 async function fetcher(key: string) {
   console.log(key);
@@ -44,7 +45,9 @@ console.log(data);
         </div>
       </form>
       <ul className="divide-y divide-gray-200 px-4">
-        <Todo />
+        {data?.map((todo: TodoType) => {
+          return <Todo key={todo.id} todo={todo}/>
+        })}
       </ul>
     </div>
   );
