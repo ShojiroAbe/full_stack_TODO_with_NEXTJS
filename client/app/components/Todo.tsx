@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import type { TodoType } from "../types"
 
 type TodoProps = {
@@ -6,6 +6,13 @@ type TodoProps = {
 }
 
 export const Todo = ({ todo } : TodoProps) => {
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [isEditedTitle, setEditedTitle] = useState<string>(todo.title);
+
+  const handleEdit = () => {
+    setIsEditing(!isEditing)
+  }
+
   return (
     <div>
       <li className="py-4">
@@ -19,14 +26,19 @@ export const Todo = ({ todo } : TodoProps) => {
                     border-gray-300 rounded"
             />
             <label className="ml-3 block text-gray-900">
-              <span className="text-lg font-medium mr-2">{ todo.title }</span>
+              {isEditing ? (
+                <input type='text' className='border rounded py-1 px-2' value={isEditedTitle} onChange={(e) => setEditedTitle(e.target.value)}/>
+              ): (
+                <span className="text-lg font-medium mr-2">{ todo.title }</span>
+              )}
             </label>
           </div>
           <div className="flex items-center space-x-2">
             <button
+              onClick={handleEdit}
               className="duration-150 bg-green-600 hover:bg-green-700 text-white font-medium py-1 px-2 rounded"
             >
-              ✒
+              {isEditing ? "Save" : "✒"}
             </button>
             <button
               className="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-2 rounded"
