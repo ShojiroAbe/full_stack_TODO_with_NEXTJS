@@ -1,16 +1,42 @@
 import React, { useState } from 'react'
 import type { TodoType } from "../types"
+import { title } from 'process'
+import useSWR from "swr";
+
 
 type TodoProps = {
-  todo: TodoType
+  todo: TodoType;
 }
+
+  async function fetcher(key: string) {
+    return fetch(key).then((res) => res.json())
+  }
 
 export const Todo = ({ todo } : TodoProps) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [isEditedTitle, setEditedTitle] = useState<string>(todo.title);
+  const [editedTitle, setEditedTitle] = useState<string>(todo.title);
 
-  const handleEdit = () => {
-    setIsEditing(!isEditing)
+  const { data, isLoading, error, mutate } = useSWR('http://localhost:8080/allTodos', fetcher)
+
+  const handleEdit = async (e: React.FormEvent) => {
+    setIsEditing(!isEditing);
+    if(isEditing) {
+      const response = await fetch(`http://localhost:8080/editTodo/${todo.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({title: editedTitle}),
+    });
+
+      if (response.ok) {
+        const editTodo = await response.json();
+        console.log('mutate', ...data);
+        console.log('mutate', editTodo);
+        
+        mutate([...data, editTodo])
+        setEditedTitle("");
+      }
+    }
+
   }
 
   return (
@@ -27,7 +53,7 @@ export const Todo = ({ todo } : TodoProps) => {
             />
             <label className="ml-3 block text-gray-900">
               {isEditing ? (
-                <input type='text' className='border rounded py-1 px-2' value={isEditedTitle} onChange={(e) => setEditedTitle(e.target.value)}/>
+                <input type='text' className='border rounded py-1 px-2' value={editedTitle} onChange={(e) => setEditedTitle(e.target.value)}/>
               ): (
                 <span className="text-lg font-medium mr-2">{ todo.title }</span>
               )}
