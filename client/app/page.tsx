@@ -6,22 +6,14 @@ import { Todo } from "./components/Todo";
 import useSWR from "swr";
 import type { TodoType } from "./types"
 import { useRef } from "react";
-
-async function fetcher(key: string) {
-  console.log(key);
-  // keyにはエンドポイントが入ります
-  return fetch(key).then((res) => res.json())
-}
+import { useTodos } from "./hooks/useTodos";
 
 export default function Home() {
   // const allTodos = await fetch("API", { cache: "no-store" })
   // const allTodos = await fetch("API", { cache: "force-cache" })
 
   const inputRef = useRef<HTMLInputElement | null>(null)
-
-  // SWRは、Reactアプリケーションでデータを取得・キャッシュするためのライブラリ
-  const { data, isLoading, error, mutate } = useSWR('http://localhost:8080/allTodos', fetcher)
-  console.log(data);
+  const { todos, isLoading, error, mutate } = useTodos();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,10 +31,10 @@ export default function Home() {
 
     if (response.ok) {
       const newTodo = await response.json();
-      console.log('mutate', ...data);
+      console.log('mutate', ...todos);
       console.log('mutate', newTodo);
       
-      mutate([...data, newTodo])
+      mutate([...todos, newTodo])
       // inputRef.current!.value = ""; or ↓
       if (inputRef.current?.value) {
         inputRef.current.value = "";
@@ -76,7 +68,7 @@ export default function Home() {
         </div>
       </form>
       <ul className="divide-y divide-gray-200 px-4">
-        {data?.map((todo: TodoType) => {
+        {todos?.map((todo: TodoType) => {
           return <Todo key={todo.id} todo={todo}/>
         })}
       </ul>
