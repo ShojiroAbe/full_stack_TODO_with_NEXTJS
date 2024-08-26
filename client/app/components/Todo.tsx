@@ -2,21 +2,19 @@ import React, { useState } from 'react'
 import type { TodoType } from "../types"
 import { title } from 'process'
 import useSWR from "swr";
+import { useTodos } from '../hooks/useTodos';
 
 
 type TodoProps = {
   todo: TodoType;
 }
 
-  async function fetcher(key: string) {
-    return fetch(key).then((res) => res.json())
-  }
-
 export const Todo = ({ todo } : TodoProps) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editedTitle, setEditedTitle] = useState<string>(todo.title);
+  // todosをフェッチ・キャッチした状態でフェッチできるカスタムフックス
+  const { todos, isLoading, error, mutate } = useTodos();
 
-  const { data, isLoading, error, mutate } = useSWR('http://localhost:8080/allTodos', fetcher)
 
   const handleEdit = async (e: React.FormEvent) => {
     setIsEditing(!isEditing);
@@ -28,11 +26,10 @@ export const Todo = ({ todo } : TodoProps) => {
     });
 
       if (response.ok) {
-        const editTodo = await response.json();
-        console.log('mutate', ...data);
-        console.log('mutate', editTodo);
+        const editedTodo = await response.json();
+        console.log('todos', todos);
         
-        mutate([...data, editTodo])
+        mutate([...todos, editedTodo])
         setEditedTitle("");
       }
     }
