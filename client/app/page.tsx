@@ -15,6 +15,8 @@ export default function Home() {
   const inputRef = useRef<HTMLInputElement | null>(null)
   const { todos, isLoading, error, mutate } = useTodos();
 
+  console.log(todos);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
