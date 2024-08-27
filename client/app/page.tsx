@@ -7,6 +7,7 @@ import useSWR from "swr";
 import type { TodoType } from "./types"
 import { useRef } from "react";
 import { useTodos } from "./hooks/useTodos";
+import { API_URL } from "@/constants/url";
 
 export default function Home() {
   // const allTodos = await fetch("API", { cache: "no-store" })
@@ -22,7 +23,7 @@ export default function Home() {
 
     console.log(inputRef.current?.value);
 
-    const response = await fetch('http://localhost:8080/createTodo', {
+    const response = await fetch(`${API_URL}/createTodo`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
