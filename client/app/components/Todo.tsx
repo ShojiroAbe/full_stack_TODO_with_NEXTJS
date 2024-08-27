@@ -3,7 +3,7 @@ import type { TodoType } from "../types"
 import { title } from 'process'
 import useSWR from "swr";
 import { useTodos } from '../hooks/useTodos';
-
+import { API_URL } from "@/constants/url";
 
 type TodoProps = {
   todo: TodoType;
@@ -19,7 +19,7 @@ export const Todo = ({ todo } : TodoProps) => {
   const handleEdit = async (e: React.FormEvent) => {
     setIsEditing(!isEditing);
     if(isEditing) {
-      const response = await fetch(`http://localhost:8080/editTodo/${todo.id}`, {
+      const response = await fetch(`${API_URL}/editTodo/${todo.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({title: editedTitle}),
@@ -35,7 +35,7 @@ export const Todo = ({ todo } : TodoProps) => {
   }
 
   const handleDelete = async (id: number) => {
-    const response = await fetch(`http://localhost:8080/deleteTodo/${todo.id}`, {
+    const response = await fetch(`${API_URL}/deleteTodo/${todo.id}`, {
       method: "DELETE",
       // ※ headerなくても大丈夫
       headers: { "Content-Type": "application/json" },
@@ -49,7 +49,7 @@ export const Todo = ({ todo } : TodoProps) => {
   }
 
   const toggleTodoCompletion = async (id: number, isCompleted: boolean) => {
-    const response = await fetch(`http://localhost:8080/editTodo/${todo.id}`, {
+    const response = await fetch(`${API_URL}/editTodo/${todo.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({isCompleted: !isCompleted}),
